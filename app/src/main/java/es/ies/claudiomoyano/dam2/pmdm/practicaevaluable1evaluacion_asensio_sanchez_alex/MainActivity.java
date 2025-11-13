@@ -2,6 +2,11 @@ package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanc
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +21,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements RecyclerCancionesInterface{
     ArrayList<Cancion> listaCanciones = new ArrayList<>();
     AdaptadorCanciones adaptadorCanciones = new AdaptadorCanciones(listaCanciones, this);
+
+    private int cancionSeleccionada = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +82,33 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
 
     @Override
     public void onItemLongClick(int posicion) {
+        cancionSeleccionada = posicion;
 
+        // Abrimos el menú contextual manualmente
+        openContextMenu(findViewById(R.id.rvCanciones));
+    }
+
+    /*MENU CONTEXTUAL*/
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_contextual, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        //Recogo la posicion del metodo on long click
+        int posicion = cancionSeleccionada;
+
+            Cancion cancion = listaCanciones.get(posicion);
+
+            if(ControladorCancionesFavoritas.guardarCancion(this, cancion)){
+                Toast.makeText(getApplicationContext(), "Cancion añadida afavoritos", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(), "La cancion ya estaba añadida a favoritos", Toast.LENGTH_SHORT).show();
+            }
+
+            return true;
     }
 }
