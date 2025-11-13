@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.List;
-public class AdaptadorCanciones extends RecyclerView.Adapter<AdaptadorCanciones.AlbumViewHolder> {
+
+public class AdaptadorCanciones extends RecyclerView.Adapter<AdaptadorCanciones.CancionViewHolder> {
     private ArrayList<Cancion> listaCanciones;
     private final RecyclerCancionesInterface recyclerCancionesInterface;
     public AdaptadorCanciones(ArrayList<Cancion> listaCanciones, RecyclerCancionesInterface recyclerCancionesInterface) {
@@ -23,14 +23,14 @@ public class AdaptadorCanciones extends RecyclerView.Adapter<AdaptadorCanciones.
 
     @NonNull
     @Override
-    public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CancionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater from = LayoutInflater.from(parent.getContext());
-        View inflate = from.inflate(R.layout.item_albumes, parent, false);
-        return new AlbumViewHolder(inflate);
+        View inflate = from.inflate(R.layout.item_cancion, parent, false);
+        return new CancionViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CancionViewHolder holder, int position) {
         Cancion cancion = this.listaCanciones.get(position);
 
         Glide.with(holder.imagen.getContext())
@@ -51,13 +51,13 @@ public class AdaptadorCanciones extends RecyclerView.Adapter<AdaptadorCanciones.
         return this.listaCanciones.size();
     }
 
-    public class AlbumViewHolder extends RecyclerView.ViewHolder {
+    public class CancionViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagen;
         public TextView titulo;
         public TextView artista;
         public TextView duracion;
 
-        public AlbumViewHolder(@NonNull View itemView) {
+        public CancionViewHolder(@NonNull View itemView) {
             super(itemView);
             imagen = itemView.findViewById(R.id.imagenCancion);
             titulo = itemView.findViewById(R.id.nombreCancion);
