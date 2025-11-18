@@ -3,24 +3,35 @@ package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanc
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationView;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements RecyclerCancionesInterface{
     ArrayList<Cancion> listaCanciones = new ArrayList<>();
     AdaptadorCanciones adaptadorCanciones = new AdaptadorCanciones(listaCanciones, this);
+
+    ControladorCancionesFavoritas controladorCancionesFavoritas = new ControladorCancionesFavoritas();
 
     private int cancionSeleccionada = -1;
 
@@ -42,6 +53,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
 
         rvCanciones.setAdapter(adaptadorCanciones);
         registerForContextMenu(rvCanciones);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        //Indico a la aplicacion que mi toolbar sera la action bar
+        setSupportActionBar(toolbar);
+        //Desactivo que se muestre el nombre de la aplicacion en el toolbar
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
         /* Esto se ejecuta en un hilo secundario porque de hacerlo en el principal, el listado de canciones no
            se carga correctamente debido a que android bloquea tareas que tarden mucho en ejecutarse en el onCreate del
@@ -103,12 +122,43 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
 
             Cancion cancion = listaCanciones.get(posicion);
 
-            if(ControladorCancionesFavoritas.guardarCancion(this, cancion)){
+            if(controladorCancionesFavoritas.guardarCancion(this, cancion)){
                 Toast.makeText(getApplicationContext(), "Cancion añadida afavoritos", Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(getApplicationContext(), "La cancion ya estaba añadida a favoritos", Toast.LENGTH_SHORT).show();
             }
 
             return true;
+    }
+
+    /*MENU OPCIONES*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu){
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.opcion_buscar) {
+
+            return true;
+        }else if(id == R.id.opcion_favorito){
+            Intent intentFavoritos = new Intent(this, FavoritosActivity.class);
+
+            startActivity(intentFavoritos);
+
+            return true;
+
+        }
+        else{
+            return true;
+        }
+
     }
 }

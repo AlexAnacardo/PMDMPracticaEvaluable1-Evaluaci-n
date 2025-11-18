@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ControladorCancionesFavoritas {
 
-    static ArrayList<Cancion> listaCanciones = new ArrayList<>();
+    private ArrayList<Cancion> listaCanciones = new ArrayList<>();
 
     public void cargarFavoritas(Context context){
         SharedPreferences prefs = context.getSharedPreferences("canciones-favoritas", Context.MODE_PRIVATE);
@@ -21,16 +21,22 @@ public class ControladorCancionesFavoritas {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<Cancion>>() {}.getType();
 
+        listaCanciones.clear();
         if (json != null) {
             listaCanciones.addAll(gson.fromJson(json, type));
         }
     }
 
-    public static ArrayList<Cancion> obtenerListadoFavoritas(){
+    public ArrayList<Cancion> obtenerListadoFavoritas(Context context){
+
+        cargarFavoritas(context);
+
         return listaCanciones;
     }
 
-    public static boolean guardarCancion(Context context, Cancion cancion){
+    public boolean guardarCancion(Context context, Cancion cancion){
+
+        cargarFavoritas(context);
 
         if(!listaCanciones.contains(cancion)){
             listaCanciones.add(cancion);

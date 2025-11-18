@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetalleCancionActivity"></activity>
+        <activity android:name=".FavoritosActivity"></activity>
     </application>
 
 </manifest>

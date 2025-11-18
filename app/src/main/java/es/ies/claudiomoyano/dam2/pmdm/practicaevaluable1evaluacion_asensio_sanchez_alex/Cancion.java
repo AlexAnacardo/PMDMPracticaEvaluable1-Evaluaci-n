@@ -1,5 +1,7 @@
 package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanchez_alex;
 
+import java.util.Objects;
+
 public class Cancion {
 
     String titulo;
@@ -76,5 +78,18 @@ public class Cancion {
 
     public void setFotoArtista(String fotoArtista) {
         this.fotoArtista = fotoArtista;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Cancion)) return false;
+        Cancion otra = (Cancion) obj;
+        return titulo.equals(otra.titulo) && artista.equals(otra.artista);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo, artista);
     }
 }
