@@ -47,7 +47,7 @@ public class ControladorCancionesFavoritas {
         }
     }
 
-    public static void guardarFavoritos(Context context, List<Cancion> lista) {
+    public void guardarFavoritos(Context context, List<Cancion> lista) {
             SharedPreferences prefs = context.getSharedPreferences("canciones-favoritas", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
 
@@ -57,6 +57,9 @@ public class ControladorCancionesFavoritas {
             editor.apply();
     }
 
-
-
+    public void eliminarFavorita(Context context, Cancion cancion){
+        cargarFavoritas(context);
+        listaCanciones.remove(cancion);
+        guardarFavoritos(context, listaCanciones);
+    }
 }

@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //Recogo la posicion del metodo on long click
+        //Recojo la posicion del metodo on long click
         int posicion = cancionSeleccionada;
 
             Cancion cancion = listaCanciones.get(posicion);
@@ -147,6 +147,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
         int id = item.getItemId();
         if (id == R.id.opcion_buscar) {
 
+            Intent intentBuscar = new Intent(this, ActivityBuscar.class);
+
+            startActivity(intentBuscar);
+
             return true;
         }else if(id == R.id.opcion_favorito){
             Intent intentFavoritos = new Intent(this, FavoritosActivity.class);
@@ -154,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             startActivity(intentFavoritos);
 
             return true;
-
         }
         else{
             return true;

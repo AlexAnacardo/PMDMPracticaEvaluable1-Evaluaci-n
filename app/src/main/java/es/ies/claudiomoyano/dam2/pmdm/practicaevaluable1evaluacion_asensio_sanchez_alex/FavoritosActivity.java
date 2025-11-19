@@ -2,6 +2,11 @@ package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanc
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +18,12 @@ public class FavoritosActivity extends AppCompatActivity implements RecyclerCanc
 
     ArrayList<Cancion> listaCancionesFavoritas = new ArrayList<>();
 
+    private int cancionSeleccionada = -1;
+
+    ControladorCancionesFavoritas controladorCancionesFavoritas = new ControladorCancionesFavoritas();
+
+    AdaptadorCanciones adaptadorFavoritos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +34,7 @@ public class FavoritosActivity extends AppCompatActivity implements RecyclerCanc
 
         listaCancionesFavoritas = controladorCancionesFavoritas.obtenerListadoFavoritas(this);
 
-        AdaptadorCanciones adaptadorFavoritos = new AdaptadorCanciones(listaCancionesFavoritas, this);
+        adaptadorFavoritos = new AdaptadorCanciones(listaCancionesFavoritas, this);
 
         RecyclerView rvCanciones = findViewById(R.id.rvCancionesFavoritas);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -31,15 +42,56 @@ public class FavoritosActivity extends AppCompatActivity implements RecyclerCanc
         rvCanciones.setLayoutManager(linearLayoutManager);
 
         rvCanciones.setAdapter(adaptadorFavoritos);
+
+        registerForContextMenu(rvCanciones);
     }
 
     @Override
     public void onItemClick(int posicion) {
+        Intent detalleCancionIntent = new Intent(this, DetalleCancionActivity.class);
+        Cancion cancion = listaCancionesFavoritas.get(posicion);
 
+        detalleCancionIntent.putExtra("titulo", cancion.getTitulo());
+        detalleCancionIntent.putExtra("artista", cancion.getArtista());
+        detalleCancionIntent.putExtra("duracion", cancion.getDuracion());
+        detalleCancionIntent.putExtra("foto", cancion.getFoto());
+        detalleCancionIntent.putExtra("fechaLanzamiento", cancion.getFechaLanzamiento());
+        detalleCancionIntent.putExtra("nombreAlbum", cancion.getNombreAlbum());
+        detalleCancionIntent.putExtra("fotoArtista", cancion.getFotoArtista());
+
+        startActivity(detalleCancionIntent);
     }
 
     @Override
     public void onItemLongClick(int posicion) {
+        cancionSeleccionada = posicion;
 
+        // Abrimos el menú contextual manualmente
+        openContextMenu(findViewById(R.id.rvCancionesFavoritas));
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_eliminar_favoritos, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        //Recojo la posicion del metodo on long click
+        int posicion = cancionSeleccionada;
+
+        Cancion cancion = listaCancionesFavoritas.get(posicion);
+
+        controladorCancionesFavoritas.eliminarFavorita(this, cancion);
+        listaCancionesFavoritas.remove(cancion);
+
+        adaptadorFavoritos.notifyItemRemoved(posicion);
+
+        Toast.makeText(getApplicationContext(), "Canción "+cancion.getTitulo()+" eliminada de favoritos", Toast.LENGTH_SHORT).show();
+
+
+        return true;
     }
 }
