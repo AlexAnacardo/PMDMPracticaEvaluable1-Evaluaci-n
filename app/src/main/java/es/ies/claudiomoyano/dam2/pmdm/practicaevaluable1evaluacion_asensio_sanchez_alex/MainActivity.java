@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -27,7 +28,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity implements RecyclerCancionesInterface{
+public class MainActivity extends AppCompatActivity implements RecyclerCancionesInterface {
     ArrayList<Cancion> listaCanciones = new ArrayList<>();
     AdaptadorCanciones adaptadorCanciones = new AdaptadorCanciones(listaCanciones, this);
 
@@ -158,6 +159,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             startActivity(intentFavoritos);
 
             return true;
+        }
+        else if(id == R.id.acerca_de){
+            new InfoDialogFragment().show(getSupportFragmentManager(), "Info");
+            return true;
+
         }
         else{
             return true;
