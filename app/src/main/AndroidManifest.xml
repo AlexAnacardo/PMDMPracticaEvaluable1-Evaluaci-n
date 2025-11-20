@@ -26,6 +26,8 @@
         <activity android:name=".DetalleCancionActivity"></activity>
         <activity android:name=".FavoritosActivity"></activity>
         <activity android:name=".ActivityBuscar"></activity>
+        <activity android:name=".DatosUsuarioActivity"></activity>
+        <activity android:name=".EditarActivity"></activity>
     </application>
 
 </manifest>

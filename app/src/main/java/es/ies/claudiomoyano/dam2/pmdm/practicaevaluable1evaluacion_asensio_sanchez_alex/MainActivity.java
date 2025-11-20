@@ -165,6 +165,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             return true;
 
         }
+        else if(id == R.id.datos_usuario){
+            Intent intentDatosUsuario = new Intent(this, DatosUsuarioActivity.class);
+            startActivity(intentDatosUsuario);
+            return true;
+        }
         else{
             return true;
         }

@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/acerca_de"
-        android:title="acercaDe"
-        android:icon="@drawable/info"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/opcion_favorito"
+        android:title="buscar"
+        android:icon="@drawable/favorito"
+
+        app:showAsAction="ifRoom"
+        />
 
     <item
         android:id="@+id/opcion_buscar"
@@ -14,10 +16,17 @@
         android:icon="@drawable/buscar"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/opcion_favorito"
-        android:title="buscar"
-        android:icon="@drawable/favorito"
+        android:id="@+id/datos_usuario"
+        android:title="datosUsuario"
+        android:icon="@drawable/placeholder_usuario"
+        app:showAsAction="ifRoom" />
 
-        app:showAsAction="ifRoom"
-        />
+    <item
+        android:id="@+id/acerca_de"
+        android:title="acercaDe"
+        android:icon="@drawable/info"
+        app:showAsAction="ifRoom" />
+
+
+
 </menu>
