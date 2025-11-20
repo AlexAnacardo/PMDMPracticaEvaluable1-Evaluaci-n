@@ -1,8 +1,9 @@
 package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanchez_alex;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Cancion {
+public class Cancion implements Serializable {
 
     String titulo;
     String artista;

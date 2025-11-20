@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FavoritosActivity extends AppCompatActivity implements RecyclerCancionesInterface{
+public class FavoritosActivity extends AppCompatActivity implements RecyclerCancionesInterface {
 
     ArrayList<Cancion> listaCancionesFavoritas = new ArrayList<>();
 

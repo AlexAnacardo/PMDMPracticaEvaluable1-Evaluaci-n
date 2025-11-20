@@ -15,9 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ActivityBuscar extends AppCompatActivity implements RecyclerCancionesInterface{
+public class ActivityBuscar extends AppCompatActivity implements RecyclerCancionesInterface, Serializable {
 
     ArrayList<Cancion> listaBusqueda = new ArrayList<>();
 
@@ -65,6 +66,20 @@ public class ActivityBuscar extends AppCompatActivity implements RecyclerCancion
                 }).start();
             }
         });
+
+        //Si hay guardada una lista de una instancia anterior, se carga, lo uso para mantener el listado al
+        //cambiar de vertical a horizontal
+        if (savedInstanceState != null) {
+            ArrayList<Cancion> guardada =
+                    (ArrayList<Cancion>) savedInstanceState.getSerializable("listaBusqueda");
+
+            if (guardada != null) {
+                listaBusqueda.clear();
+                listaBusqueda.addAll(guardada);
+
+                adaptadorCanciones.notifyDataSetChanged();
+            }
+        }
     }
 
     @Override
@@ -113,4 +128,13 @@ public class ActivityBuscar extends AppCompatActivity implements RecyclerCancion
 
         return true;
     }
+
+    //Para mantener el listado de busqueda al cambair el display del layout
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putSerializable("listaBusqueda", listaBusqueda);
+    }
+
 }
