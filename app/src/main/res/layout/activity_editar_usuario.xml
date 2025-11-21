@@ -47,6 +47,26 @@
         app:layout_constraintTop_toBottomOf="@id/etNombre"
         app:layout_constraintStart_toStartOf="@id/tvEditarFechaNacimiento"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/botonSeleccionarHora"/>
+
+    <TextView
+        android:id="@+id/tvEditarHoraNacimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@id/botonSeleccionarHora"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/botonSeleccionarHora"
+        app:layout_constraintBottom_toBottomOf="@id/botonSeleccionarHora"/>
+
+    <Button
+        android:id="@+id/botonSeleccionarHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintTop_toBottomOf="@id/botonSeleccionarFecha"
+        app:layout_constraintStart_toStartOf="@id/tvEditarHoraNacimiento"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/rbGroupSexo"/>
 
     <TextView

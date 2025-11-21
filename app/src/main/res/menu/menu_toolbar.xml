@@ -17,13 +17,13 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/datos_usuario"
-        android:title="datosUsuario"
+        android:title="Datos del usaurio"
         android:icon="@drawable/placeholder_usuario"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/acerca_de"
-        android:title="acercaDe"
+        android:title="Acerca de la aplicacion"
         android:icon="@drawable/info"
         app:showAsAction="ifRoom" />
 

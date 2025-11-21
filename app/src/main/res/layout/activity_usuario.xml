@@ -22,13 +22,24 @@
         app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvHoraNacimiento"/>
+
+    <TextView
+        android:id="@+id/tvHoraNacimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TFecha nacimiento"
+        app:layout_constraintTop_toBottomOf="@id/tvFechaNacimiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvSexo"/>
+
     <TextView
         android:id="@+id/tvSexo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sexo"
-        app:layout_constraintTop_toTopOf="@id/tvFechaNacimiento"
+        app:layout_constraintTop_toTopOf="@id/tvHoraNacimiento"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/fotoPerfil"/>
