@@ -209,15 +209,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
     }
 
     private void cambiarIdioma(String idioma) {
+        //Creo un locale usando el codigo pasado al pulsar el boton del menu drawer
         Locale locale = new Locale(idioma);
+        //Lo marco como el idioma por defecto, esto solo cambia las configuraciones de java a la hora de mostrar cosas como por ejemplo, el tecloado o el formateo de fechas
         Locale.setDefault(locale);
 
+        //Obtengo la configuracion del sistema y le aplico el idioma, esto afecta al archivo del que la aplicacion toma los recursos
         Configuration config = getResources().getConfiguration();
         config.setLocale(locale);
 
+        //Recargo los recursos (strings.xml) para que el sistema use el correspondiente al idioma seleccionado
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-        // Reiniciar actividad para que recargue los strings
+        // Vuelvo a lanzar la activity main para que se apliquen los cambios
         Intent intent = getIntent();
         finish();
         startActivity(intent);
