@@ -13,21 +13,8 @@ public class InfoDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new AlertDialog.Builder(requireContext())
-                .setMessage("Autor de la APP: Alex Asensio Sanchez")
-                .setPositiveButton("Aceptar", (dialog, which) -> {} )
+                .setMessage(getString(R.string.autor)+" Alex Asensio Sanchez")
+                .setPositiveButton(getString(R.string.botonAceptar), (dialog, which) -> {} )
                 .create();
     }
 }
-
-
-
-/*
-@NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return new AlertDialog.Builder(requireContext())
-                .setMessage(getString(R.string.order_confirmation))
-                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {} )
-                .create();
-    }
- */

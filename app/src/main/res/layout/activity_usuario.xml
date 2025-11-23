@@ -56,7 +56,7 @@
         android:id="@+id/botonEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Editar"
+        android:text="@string/botonEditar"
         app:layout_constraintTop_toBottomOf="@id/fotoPerfil"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

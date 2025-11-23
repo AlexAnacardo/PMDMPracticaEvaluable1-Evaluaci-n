@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">PracticaEvaluable1ªEvaluacion_Asensio_Sanchez_Alex</string>
+
+    <string name="datosUsuario">Datos del usuario</string>
+    <string name="acercaDe">Acerca de la aplicacion</string>
+
+    <string name="botonBuscar">Buscar</string>
+
+    <string name="botonEditar">Editar</string>
+
+    <string name="tvNombre">Nombre</string>
+    <string name="tvFechaNac">Fecha nacimiento</string>
+    <string name="botonFecha">Seleccionar fecha</string>
+    <string name="tvHoraNac">Hora nacimiento</string>
+    <string name="botonHora">Seleccionar hora</string>
+    <string name="tvSexo">Sexo</string>
+    <string name="botonHombre">Hombre</string>
+    <string name="botonMujer">Mujer</string>
+    <string name="botonOtro">Otro</string>
+    <string name="tvFoto">Foto de perfil</string>
+    <string name="botonFoto">Seleccionar foto</string>
+    <string name="botonAceptarEditar">Confirmar edicion</string>
+
+
+    <string name="toastAñadidoFavoritos">Cancion añadida afavoritos</string>
+    <string name="toastYaEstaAñadidoFavoritos">La cancion ya estaba añadida a favoritos</string>
+
+    <string name="botonAñadirFavorito">Añadir a favoritos</string>
+    <string name="botonEliminarFavorito">Eliminar de favoritos</string>
+
+    <string name="toastEliminadaDeFavoritos">Eliminada de favoritos</string>
+
+    <string name="autor">Autor de la app: </string>
+    <string name="botonAceptar">Aceptar</string>
+
 </resources>

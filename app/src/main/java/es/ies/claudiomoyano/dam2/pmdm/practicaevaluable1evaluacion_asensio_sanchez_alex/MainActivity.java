@@ -1,12 +1,15 @@
 package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanchez_alex;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -27,6 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements RecyclerCancionesInterface {
     ArrayList<Cancion> listaCanciones = new ArrayList<>();
@@ -35,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
     ControladorCancionesFavoritas controladorCancionesFavoritas = new ControladorCancionesFavoritas();
 
     private int cancionSeleccionada = -1;
+
+    private DrawerLayout drawerLayout;
+
+    private NavigationView navView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +70,31 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
+        drawerLayout = findViewById(R.id.main);
+        //Recojo el contenido del menu desplegable
+        navView = findViewById(R.id.nav_view);
+
+        navView = findViewById(R.id.nav_view);
+        //Le asigno al menu desplegable los eventos correspondientes a sus items
+        navView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if(id == R.id.idioma_español) {
+                cambiarIdioma("es");
+            } else if(id == R.id.idioma_ingles){
+                cambiarIdioma("en");
+            }
+
+            drawerLayout.closeDrawers();
+            return true;
+        });
+
+
+        // Configurar el botón hamburguesa para desplegar el menu drawer
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         /* Esto se ejecuta en un hilo secundario porque de hacerlo en el principal, el listado de canciones no
            se carga correctamente debido a que android bloquea tareas que tarden mucho en ejecutarse en el onCreate del
@@ -124,9 +157,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             Cancion cancion = listaCanciones.get(posicion);
 
             if(controladorCancionesFavoritas.guardarCancion(this, cancion)){
-                Toast.makeText(getApplicationContext(), "Cancion añadida afavoritos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.toastAñadidoFavoritos, Toast.LENGTH_SHORT).show();
             }else {
-                Toast.makeText(getApplicationContext(), "La cancion ya estaba añadida a favoritos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.toastYaEstaAñadidoFavoritos, Toast.LENGTH_SHORT).show();
             }
 
             return true;
@@ -173,6 +206,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
         else{
             return true;
         }
-
     }
+
+    private void cambiarIdioma(String idioma) {
+        Locale locale = new Locale(idioma);
+        Locale.setDefault(locale);
+
+        Configuration config = getResources().getConfiguration();
+        config.setLocale(locale);
+
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+        // Reiniciar actividad para que recargue los strings
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
 }

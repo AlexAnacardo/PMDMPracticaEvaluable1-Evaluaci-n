@@ -121,11 +121,11 @@ public class EditarActivity extends AppCompatActivity {
                 String sexoAnterior = prefs.getString("sexo", "");
 
                 if (radioSeleccionado == R.id.rbHombre) {
-                    editor.putString("sexo", "Hombre");
+                    editor.putString("sexo", getString(R.string.botonHombre));
                 } else if (radioSeleccionado == R.id.rbMujer) {
-                    editor.putString("sexo", "Mujer");
+                    editor.putString("sexo", getString(R.string.botonMujer));
                 } else if (radioSeleccionado == R.id.rbOtro) {
-                    editor.putString("sexo", "Otro");
+                    editor.putString("sexo", getString(R.string.botonOtro));
                 } else {
                     // si no seleccionó nada, mantener valor anterior
                     editor.putString("sexo", sexoAnterior);

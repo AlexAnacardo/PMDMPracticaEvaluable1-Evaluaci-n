@@ -89,7 +89,7 @@ public class FavoritosActivity extends AppCompatActivity implements RecyclerCanc
 
         adaptadorFavoritos.notifyItemRemoved(posicion);
 
-        Toast.makeText(getApplicationContext(), "Canción "+cancion.getTitulo()+" eliminada de favoritos", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), cancion.getTitulo()+" eliminada de favoritos", Toast.LENGTH_SHORT).show();
 
 
         return true;
