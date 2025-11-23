@@ -81,13 +81,20 @@ public class EditarActivity extends AppCompatActivity {
         botonSeleccionaFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Si no se han concedido permisos para acceder al almacenamiento interno, se piden
                 if (checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, 1);
                 } else {
+                    //Abro el selector de archivos y le indico que filtre solo las imagenes
                     Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                     intent.setType("image/*");
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
 
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+
+                    //Lanzo la actividad
                     startActivityForResult(intent, 2);
                 }
             }
@@ -99,24 +106,62 @@ public class EditarActivity extends AppCompatActivity {
                 SharedPreferences prefs = getSharedPreferences("datos_usuario", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
 
-                editor.putString("nombre", nombreIntroducido.getText().toString());
+                String nombreNuevo = nombreIntroducido.getText().toString().trim();
+                String nombreAnterior = prefs.getString("nombre", "");
+
+                if (!nombreNuevo.isEmpty()) {
+                    editor.putString("nombre", nombreNuevo);
+                } else {
+                    editor.putString("nombre", nombreAnterior);
+                }
+
 
                 int radioSeleccionado = selectorSexo.getCheckedRadioButtonId();
 
-                if(radioSeleccionado == R.id.rbHombre){
+                String sexoAnterior = prefs.getString("sexo", "");
+
+                if (radioSeleccionado == R.id.rbHombre) {
                     editor.putString("sexo", "Hombre");
-                }else if(radioSeleccionado == R.id.rbMujer){
+                } else if (radioSeleccionado == R.id.rbMujer) {
                     editor.putString("sexo", "Mujer");
-                }else{
+                } else if (radioSeleccionado == R.id.rbOtro) {
                     editor.putString("sexo", "Otro");
+                } else {
+                    // si no seleccionó nada, mantener valor anterior
+                    editor.putString("sexo", sexoAnterior);
                 }
 
-                editor.putString("fechaNacimiento", diaNacimiento+"/"+mesNacimiento+"/"+anioNacimineto);
+                String fechaAnterior = prefs.getString("fechaNacimiento", "");
+                String fechaNueva = diaNacimiento + "/" + mesNacimiento + "/" + anioNacimineto;
 
-                editor.putString("uriFotoSeleccionada", imagenSeleccionada.toString());
 
+                if (diaNacimiento != -1 && mesNacimiento != -1 && anioNacimineto != -1) {
+                    editor.putString("fechaNacimiento", fechaNueva);
+                } else {
+                    editor.putString("fechaNacimiento", fechaAnterior);
+                }
+
+                String horaAnterior = prefs.getString("horaNacimiento", "");
+                String horaNueva = horaNacimiento + ":" + minutoNacimiento;
+
+                if (horaNacimiento != -1 && minutoNacimiento != -1) {
+                    editor.putString("horaNacimiento", horaNueva);
+                } else {
+                    editor.putString("horaNacimiento", horaAnterior);
+                }
+
+                String fotoAnterior = prefs.getString("uriFotoSeleccionada", "");
+
+                if (imagenSeleccionada != null) {
+                    editor.putString("uriFotoSeleccionada", imagenSeleccionada.toString());
+                } else {
+                    editor.putString("uriFotoSeleccionada", fotoAnterior);
+                }
 
                 editor.apply();
+
+                Intent intentFinalizar = new Intent(EditarActivity.this, DatosUsuarioActivity.class);
+                startActivity(intentFinalizar);
 
             }
         });
@@ -145,10 +190,27 @@ public class EditarActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //Si la actividad lanzada fue la de seleccionar la foto y el usuario subio un archivo, se ejecuta el codigo
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
 
-            imagenSeleccionada = uri;
+            if (uri != null) {
+
+                imagenSeleccionada = uri;
+
+                //Filtro los flags recogidos para solo obtener los de lectura y escritura, de dejar pasar otros la aplicacion crashea
+                int takeFlags = data.getFlags();
+                takeFlags &= (Intent.FLAG_GRANT_READ_URI_PERMISSION |
+                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+                try {
+                    //Hago que el permiso sea persistente
+                    getContentResolver().takePersistableUriPermission(uri, takeFlags);
+                } catch (SecurityException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
 }
