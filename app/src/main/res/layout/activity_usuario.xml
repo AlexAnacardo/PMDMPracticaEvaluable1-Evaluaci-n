@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".DatosUsuarioActivity">
+    tools:context=".DatosUsuarioActivity"
+    android:background="@color/background">
     <TextView
         android:id="@+id/tvNombreUsuario"
         android:layout_width="wrap_content"
@@ -58,6 +59,16 @@
         android:layout_height="wrap_content"
         android:text="@string/botonEditar"
         app:layout_constraintTop_toBottomOf="@id/fotoPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/modoOscuro"/>
+
+    <Switch
+        android:id="@+id/modoOscuro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/modoOscuro"
+        app:layout_constraintTop_toBottomOf="@id/botonEditar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

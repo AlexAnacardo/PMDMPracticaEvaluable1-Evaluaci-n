@@ -31,4 +31,6 @@
 
     <string name="autor">Author of the app: </string>
     <string name="botonAceptar">Acept</string>
+
+    <string name="modoOscuro">Dark mode</string>
 </resources>

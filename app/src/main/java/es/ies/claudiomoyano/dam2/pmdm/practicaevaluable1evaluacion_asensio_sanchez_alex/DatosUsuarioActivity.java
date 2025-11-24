@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class DatosUsuarioActivity extends AppCompatActivity {
     @Override
@@ -54,6 +56,18 @@ public class DatosUsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentEditar = new Intent(DatosUsuarioActivity.this, EditarActivity.class);
                 startActivity(intentEditar);
+            }
+        });
+
+        //Recojo el switch
+        Switch switchModooscuro = findViewById(R.id.modoOscuro);
+        //Le asigno un listener para cada vez que se active/desactive, al hacerlo se activara y desactivara el modo noche
+        //lo que cambia el colors.xml que la app usa por defecto
+        switchModooscuro.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
     }

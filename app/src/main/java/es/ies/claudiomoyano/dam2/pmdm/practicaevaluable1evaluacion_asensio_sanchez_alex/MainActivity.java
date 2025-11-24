@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
         });
 
 
-        // Configurar el botón hamburguesa para desplegar el menu drawer
+        // Configuro el botón hamburguesa para desplegar el menu drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
