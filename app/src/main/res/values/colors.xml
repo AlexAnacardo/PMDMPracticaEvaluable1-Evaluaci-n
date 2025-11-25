@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="background">#a8e3f5</color>
+    <color name="toolbar">#ff6750a4</color>
+
 </resources>
