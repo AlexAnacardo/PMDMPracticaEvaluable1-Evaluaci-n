@@ -35,4 +35,8 @@
 
     <string name="modoOscuro">Modo oscuro</string>
 
+    <string name="tvContrasena">Contraseña</string>
+    <string name="botonAceptarCrear">Aceptar</string>
+
+
 </resources>

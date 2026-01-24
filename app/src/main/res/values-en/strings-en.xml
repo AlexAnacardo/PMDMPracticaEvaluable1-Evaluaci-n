@@ -33,4 +33,8 @@
     <string name="botonAceptar">Accept</string>
 
     <string name="modoOscuro">Dark mode</string>
+
+    <string name="tvContrasena">Password</string>
+    <string name="botonAceptarCrear">Accept</string>
+
 </resources>

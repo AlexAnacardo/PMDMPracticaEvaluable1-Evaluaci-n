@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticaEvaluable1ªEvaluacion_Asensio_Sanchez_Alex">
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".DetalleCancionActivity"></activity>
         <activity android:name=".FavoritosActivity"></activity>
         <activity android:name=".ActivityBuscar"></activity>
         <activity android:name=".DatosUsuarioActivity"></activity>
         <activity android:name=".EditarActivity"></activity>
+        <activity android:name=".CrearActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CrearActivity"
+    android:background="@color/background">
+
+
+    <TextView
+        android:id="@+id/tvCrearNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvNombre"
+        app:layout_constraintTop_toTopOf="@id/etNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etNombre"
+        app:layout_constraintBottom_toBottomOf="@id/etNombre"/>
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvCrearNombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/botonSeleccionarFecha"/>
+
+    <TextView
+        android:id="@+id/tvCrearContraseña"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvContrasena"
+        app:layout_constraintTop_toBottomOf="@id/etNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/etCrearContraseña"/>
+
+    <EditText
+        android:id="@+id/etCrearContraseña"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/etNombre"
+        app:layout_constraintStart_toEndOf="@id/tvCrearContraseña"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvCrearFechaNacimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvFechaNac"
+        app:layout_constraintTop_toBottomOf="@id/etCrearContraseña"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/botonSeleccionarFecha"/>
+
+    <Button
+        android:id="@+id/botonSeleccionarFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/botonFecha"
+        app:layout_constraintTop_toBottomOf="@id/etCrearContraseña"
+        app:layout_constraintStart_toEndOf="@id/tvCrearFechaNacimiento"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvCrearHoraNacimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvHoraNac"
+        app:layout_constraintTop_toTopOf="@id/botonSeleccionarHora"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/botonSeleccionarHora"
+        app:layout_constraintBottom_toBottomOf="@id/botonSeleccionarHora"/>
+
+    <Button
+        android:id="@+id/botonSeleccionarHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/botonHora"
+        app:layout_constraintTop_toBottomOf="@id/botonSeleccionarFecha"
+        app:layout_constraintStart_toStartOf="@id/tvCrearHoraNacimiento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rbGroupSexo"/>
+
+    <TextView
+        android:id="@+id/tvCrearSexo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvSexo"
+        app:layout_constraintTop_toTopOf="@id/rbGroupSexo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rbGroupSexo"
+        app:layout_constraintBottom_toBottomOf="@id/rbGroupSexo"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvCrearFechaNacimiento"
+        app:layout_constraintStart_toEndOf="@id/tvCrearSexo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/botonSeleccionarFoto"
+        android:id="@+id/rbGroupSexo">
+
+        <RadioButton
+            android:id="@+id/rbHombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/botonHombre"
+            />
+
+        <RadioButton
+            android:id="@+id/rbMujer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/botonMujer"
+            />
+
+        <RadioButton
+            android:id="@+id/rbOtro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/botonOtro"
+            />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvFoto"
+        app:layout_constraintTop_toTopOf="@id/botonSeleccionarFoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/botonSeleccionarFoto"
+        app:layout_constraintBottom_toBottomOf="@id/botonSeleccionarFoto"/>
+
+    <Button
+        android:id="@+id/botonSeleccionarFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/botonFoto"
+        app:layout_constraintTop_toBottomOf="@id/rbGroupSexo"
+        app:layout_constraintStart_toEndOf="@id/tvFoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/botonAceptarCrear"/>
+
+    <Button
+        android:id="@+id/botonAceptarCrear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/botonAceptarCrear"
+        app:layout_constraintTop_toBottomOf="@id/botonSeleccionarFoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
