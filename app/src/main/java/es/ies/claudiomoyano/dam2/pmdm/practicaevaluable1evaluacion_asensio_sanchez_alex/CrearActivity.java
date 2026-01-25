@@ -29,9 +29,6 @@ public class CrearActivity extends AppCompatActivity {
     private RadioGroup rgSexo;
 
     int anioNacimineto, mesNacimiento, diaNacimiento, horaNacimiento, minutoNacimiento;
-
-    private String fechaSeleccionada = "";
-    private String horaSeleccionada = "";
     private byte[] imagenBytes;
 
     @Override
@@ -117,7 +114,7 @@ public class CrearActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 2️⃣ Sexo
+
                 int radioSeleccionado = rgSexo.getCheckedRadioButtonId();
                 String sexo = "";
 
@@ -132,7 +129,7 @@ public class CrearActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 3️⃣ Fecha nacimiento
+
                 if (diaNacimiento == -1 || mesNacimiento == -1 || anioNacimineto == -1) {
                     Toast.makeText(CrearActivity.this, "Selecciona fecha de nacimiento", Toast.LENGTH_SHORT).show();
                     return;
@@ -141,7 +138,7 @@ public class CrearActivity extends AppCompatActivity {
                 String fechaNacimiento =
                         diaNacimiento + "/" + mesNacimiento + "/" + anioNacimineto;
 
-                // 4️⃣ Hora nacimiento
+
                 if (horaNacimiento == -1 || minutoNacimiento == -1) {
                     Toast.makeText(CrearActivity.this, "Selecciona hora de nacimiento", Toast.LENGTH_SHORT).show();
                     return;
@@ -150,13 +147,13 @@ public class CrearActivity extends AppCompatActivity {
                 String horaNacimientoStr =
                         horaNacimiento + ":" + String.format("%02d", minutoNacimiento);
 
-                // 5️⃣ Foto
+
                 if (imagenBytes == null) {
                     Toast.makeText(CrearActivity.this, "Selecciona una foto", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // 6️⃣ Crear usuario
+
                 Usuario usuario = new Usuario(
                         nombre,
                         password,
@@ -166,7 +163,7 @@ public class CrearActivity extends AppCompatActivity {
                         imagenBytes
                 );
 
-                // 7️⃣ Insertar en Room (HILO SEPARADO)
+                //Corro la insercion en un hilo secundario, no se puede hacer en el principal
                 Executors.newSingleThreadExecutor().execute(() -> {
 
                     DatabaseClient
@@ -177,6 +174,7 @@ public class CrearActivity extends AppCompatActivity {
 
                     runOnUiThread(() -> {
                         Toast.makeText(CrearActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
+                        //Cierro el intent y vuelvo a login
                         finish();
                     });
                 });

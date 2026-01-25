@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticaEvaluable1ªEvaluacion_Asensio_Sanchez_Alex">
         <activity
-            android:name=".ActivityLogin"
+            android:name=".ActivityVideoIntro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +31,7 @@
         <activity android:name=".DatosUsuarioActivity"></activity>
         <activity android:name=".EditarActivity"></activity>
         <activity android:name=".CrearActivity"></activity>
+        <activity android:name=".ActivityLogin"></activity>
     </application>
 
 </manifest>

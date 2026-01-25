@@ -38,5 +38,9 @@
     <string name="tvContrasena">Contraseña</string>
     <string name="botonAceptarCrear">Aceptar</string>
 
+    <string name="tvUsuario">Usuario</string>
+    <string name="tvPassword">Contraseña</string>
+    <string name="botonLogin">Iniciar sesion</string>
+    <string name="botonRegistrar">Crear cuenta</string>
 
 </resources>
