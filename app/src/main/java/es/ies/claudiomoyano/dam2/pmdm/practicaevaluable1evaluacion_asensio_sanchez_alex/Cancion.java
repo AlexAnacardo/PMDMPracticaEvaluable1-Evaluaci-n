@@ -1,18 +1,31 @@
 package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanchez_alex;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Cancion implements Serializable {
+@Entity(tableName = "canciones")
+public class Cancion {
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    public long id;
+    @ColumnInfo(name = "titulo")
     String titulo;
+    @ColumnInfo(name = "artista")
     String artista;
+    @ColumnInfo(name = "duracion")
     int duracion;
+    @ColumnInfo(name = "fotoCancion")
     String foto;
-
+    @ColumnInfo(name = "fechaLanzamiento")
     String fechaLanzamiento;
+    @ColumnInfo(name = "nombreAlbum")
     String nombreAlbum;
-
+    @ColumnInfo(name = "fotoArtista")
     String fotoArtista;
 
     public Cancion(String titulo, String artista, int duracion, String foto, String fechaLanzamiento, String nombreAlbum, String fotoArtista) {
