@@ -1,6 +1,7 @@
 package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanchez_alex;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,11 @@ public class ActivityLogin extends AppCompatActivity {
 
                     runOnUiThread(() -> {
                         if (usuario != null) {
+                            //Guardo el id del usuario logueado en shared preferences para obtener el usaurio en la activity de editar
+                            //y en la de listar canciones favoritas
+                            SharedPreferences prefs = getSharedPreferences("usuarioLogueado", MODE_PRIVATE);
+                            prefs.edit().putLong("idUsuario", usuario.getId()).apply();
+
                             startActivity(new Intent(ActivityLogin.this, MainActivity.class));
                         } else {
                             Toast.makeText(ActivityLogin.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();

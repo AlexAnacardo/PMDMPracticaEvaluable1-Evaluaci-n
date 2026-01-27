@@ -30,4 +30,60 @@ public class Usuario {
         this.sexo = sexo;
         this.imagen = imagen;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getHoraNacimiento() {
+        return horaNacimiento;
+    }
+
+    public void setHoraNacimiento(String horaNacimiento) {
+        this.horaNacimiento = horaNacimiento;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 }

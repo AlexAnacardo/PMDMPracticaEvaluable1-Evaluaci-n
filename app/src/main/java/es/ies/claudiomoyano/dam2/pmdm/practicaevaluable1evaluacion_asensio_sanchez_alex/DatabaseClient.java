@@ -9,7 +9,7 @@ public class DatabaseClient {
     private final AppDatabase db;
 
     private DatabaseClient(Context context){
-        db = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "gestionMusical.db").build();
+        db = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "gestionMusical.db").fallbackToDestructiveMigration().build();
     }
 
     public static synchronized DatabaseClient getInstance(Context context){
