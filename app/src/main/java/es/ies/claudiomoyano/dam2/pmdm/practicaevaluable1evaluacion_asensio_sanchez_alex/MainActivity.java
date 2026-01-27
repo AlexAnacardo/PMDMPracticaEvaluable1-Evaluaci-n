@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
 
             startActivity(intentFavoritos);
 
+            
             return true;
         }
         else if(id == R.id.acerca_de){
@@ -201,6 +202,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
         else if(id == R.id.datos_usuario){
             Intent intentDatosUsuario = new Intent(this, DatosUsuarioActivity.class);
             startActivity(intentDatosUsuario);
+            return true;
+        }
+        else if(id == R.id.videoPresentacion){
+            Intent intentVideo = new Intent(this, ActivityVideoIntro.class);
+            intentVideo.putExtra("primeraVez", "no");
+            startActivity(intentVideo);
             return true;
         }
         else{

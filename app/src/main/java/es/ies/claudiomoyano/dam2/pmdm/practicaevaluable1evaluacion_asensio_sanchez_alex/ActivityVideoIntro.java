@@ -13,6 +13,8 @@ public class ActivityVideoIntro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        Intent intentPadre = getIntent();
+
         VideoView videoView = findViewById(R.id.videoViewIntro);
 
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.intro);
@@ -22,8 +24,11 @@ public class ActivityVideoIntro extends AppCompatActivity {
 
         // Esto se ejecuta al terminar el video para redireccionar al login
         videoView.setOnCompletionListener(mp -> {
-            Intent intent = new Intent(ActivityVideoIntro.this, ActivityLogin.class);
-            startActivity(intent);
+            if(intentPadre.getStringExtra("primeraVez")== null){
+                Intent intent = new Intent(ActivityVideoIntro.this, ActivityLogin.class);
+                startActivity(intent);
+            }
+
             // Uso esto para que el usuario no pueda volver atras
             finish();
         });

@@ -42,4 +42,6 @@
     <string name="botonLogin">Login</string>
     <string name="botonRegistrar">Sign in</string>
 
+    <string name="videoPresentacion">Ver video presentacion</string>
+
 </resources>

@@ -43,4 +43,6 @@
     <string name="botonLogin">Iniciar sesion</string>
     <string name="botonRegistrar">Crear cuenta</string>
 
+    <string name="videoPresentacion">Ver video presentacion</string>
+
 </resources>
