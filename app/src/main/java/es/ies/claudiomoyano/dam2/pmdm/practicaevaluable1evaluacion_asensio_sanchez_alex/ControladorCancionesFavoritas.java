@@ -39,10 +39,7 @@ public class ControladorCancionesFavoritas {
         });
     }
 
-    public void obtenerListadoFavoritas(
-            Context context,
-            Consumer<ArrayList<Cancion>> callback
-    ) {
+    public void obtenerListadoFavoritas(Context context, Consumer<ArrayList<Cancion>> callback) {
         Executors.newSingleThreadExecutor().execute(() -> {
 
             SharedPreferences prefs =
@@ -57,25 +54,13 @@ public class ControladorCancionesFavoritas {
                             )
             );
 
-            // volver al hilo principal
+            // volver al hilo principal, uso callback accept para pasarle al hilo principal la lista de canciones
+            //no se puede modificar nada de la UI desde un hilo secundario
             new Handler(Looper.getMainLooper()).post(() -> {
                 callback.accept(resultado);
             });
         });
     }
-
-
-    /*public boolean guardarCancion(Context context, Cancion cancion){
-
-        cargarFavoritas(context);
-
-        if(!listaCanciones.contains(cancion)){
-            guardarFavoritos(context, cancion);
-            return true;
-        }else{
-            return false;
-        }
-    }*/
 
     public void guardarCancion(Context context, Cancion cancion, Consumer<Boolean> callback) {
         Executors.newSingleThreadExecutor().execute(() -> {
@@ -83,7 +68,7 @@ public class ControladorCancionesFavoritas {
             long idUsuario = prefs.getLong("idUsuario", 1);
             var db = DatabaseClient.getInstance(context).getDb();
 
-            // 1️⃣ Insertar canción si no existe
+            // Insertar canción si no existe
             Cancion existente = db.cancionDao().obtenerPorId(cancion.getId());
             if (existente == null) {
                 long idCancion = db.cancionDao().insertarCancion(cancion); // IGNORE si ya existe
@@ -92,7 +77,7 @@ public class ControladorCancionesFavoritas {
                 cancion.id = existente.id;
             }
 
-            // 2️⃣ Comprobar si ya es favorita
+            // Comprobar si ya es favorita
             int existe = db.usuarioCancionFavoritaDao().existeFavorito(idUsuario, cancion.getId());
 
             boolean insertada;
@@ -103,51 +88,10 @@ public class ControladorCancionesFavoritas {
                 insertada = false;
             }
 
-            // 3️⃣ Volver al hilo principal
+            // Volver al hilo principal, devuelvo el resultado de la operacion
             new Handler(Looper.getMainLooper()).post(() -> callback.accept(insertada));
         });
     }
-
-
-
-    public void guardarFavoritos(Context context, Cancion cancion) {
-        Executors.newSingleThreadExecutor().execute(() -> {
-
-            SharedPreferences prefs =
-                    context.getSharedPreferences("usuarioLogueado", MODE_PRIVATE);
-
-            long idUsuario = prefs.getLong("idUsuario", -1);
-            if (idUsuario == -1) return;
-
-            var db = DatabaseClient.getInstance(context).getDb();
-
-            // 1️⃣ Obtener o insertar canción
-            Cancion existente =
-                    db.cancionDao().obtenerPorId(
-                            cancion.getId()
-                    );
-
-            if (existente == null) {
-                long idCancion = db.cancionDao().insertarCancion(cancion);
-                cancion.id = idCancion;
-            } else {
-                cancion.id = existente.id;
-            }
-
-            // 2️⃣ COMPROBAR SI YA ES FAVORITA
-            int existe = db.usuarioCancionFavoritaDao()
-                    .existeFavorito(idUsuario, cancion.getId());
-
-            if (existe == 0) {
-                UsuarioCancionFavorita ucf =
-                        new UsuarioCancionFavorita(idUsuario, cancion.getId());
-
-                db.usuarioCancionFavoritaDao().insertarFavorito(ucf);
-            }
-        });
-    }
-
-
 
     public void eliminarFavorita(Context context, Cancion cancion){
         Executors.newSingleThreadExecutor().execute(() -> {

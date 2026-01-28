@@ -33,7 +33,7 @@ public class FavoritosActivity extends AppCompatActivity implements RecyclerCanc
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvCanciones.setLayoutManager(linearLayoutManager);
 
-        // Inicializamos el adapter con lista vacía
+        // Inicializo el adapter con lista vacía
         listaCancionesFavoritas = new ArrayList<>();
         adaptadorFavoritos = new AdaptadorCanciones(listaCancionesFavoritas, this);
         rvCanciones.setAdapter(adaptadorFavoritos);

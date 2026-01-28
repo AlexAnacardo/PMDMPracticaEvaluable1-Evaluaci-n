@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
         //Recojo la posicion del metodo on long click
         int posicion = cancionSeleccionada;
 
-            Cancion cancion = listaCanciones.get(posicion);
+        Cancion cancion = listaCanciones.get(posicion);
 
         controladorCancionesFavoritas.guardarCancion(this, cancion, insertada -> {
             if (insertada) {
