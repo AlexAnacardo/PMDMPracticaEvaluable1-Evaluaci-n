@@ -19,5 +19,9 @@ public interface CancionDao {
     List<Cancion> obtenerTodas();
 
     @Query("SELECT * FROM canciones where titulo = :titulo LIMIT 1")
-    Usuario obtenerPorNombreCancion(String titulo);
+    Cancion obtenerPorNombreCancion(String titulo);
+
+    @Query("SELECT * FROM canciones WHERE id = :id")
+    Cancion obtenerPorId(long id);
+
 }

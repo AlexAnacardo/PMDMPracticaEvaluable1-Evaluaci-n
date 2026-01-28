@@ -120,11 +120,13 @@ public class ActivityBuscar extends AppCompatActivity implements RecyclerCancion
 
         Cancion cancion = listaBusqueda.get(posicion);
 
-        if(controladorCancionesFavoritas.guardarCancion(this, cancion)){
-            Toast.makeText(getApplicationContext(), "Cancion añadida afavoritos", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(getApplicationContext(), "La cancion ya estaba añadida a favoritos", Toast.LENGTH_SHORT).show();
-        }
+        controladorCancionesFavoritas.guardarCancion(this, cancion, insertada -> {
+            if (insertada) {
+                Toast.makeText(this, R.string.toastAñadidoFavoritos, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.toastYaEstaAñadidoFavoritos, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return true;
     }

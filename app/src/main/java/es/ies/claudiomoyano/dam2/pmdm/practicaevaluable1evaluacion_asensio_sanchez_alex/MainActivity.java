@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             return true;
         });
 
-
         // Configuro el botón hamburguesa para desplegar el menu drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
@@ -156,13 +155,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
 
             Cancion cancion = listaCanciones.get(posicion);
 
-            if(controladorCancionesFavoritas.guardarCancion(this, cancion)){
-                Toast.makeText(getApplicationContext(), R.string.toastAñadidoFavoritos, Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(getApplicationContext(), R.string.toastYaEstaAñadidoFavoritos, Toast.LENGTH_SHORT).show();
+        controladorCancionesFavoritas.guardarCancion(this, cancion, insertada -> {
+            if (insertada) {
+                Toast.makeText(this, R.string.toastAñadidoFavoritos, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.toastYaEstaAñadidoFavoritos, Toast.LENGTH_SHORT).show();
             }
-
-            return true;
+        });
+        return true;
     }
 
     /*MENU OPCIONES*/

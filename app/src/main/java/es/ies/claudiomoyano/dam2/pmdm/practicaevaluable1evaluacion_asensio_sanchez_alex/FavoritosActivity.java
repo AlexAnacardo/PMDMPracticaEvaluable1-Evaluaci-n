@@ -27,24 +27,27 @@ public class FavoritosActivity extends AppCompatActivity implements RecyclerCanc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ControladorCancionesFavoritas controladorCancionesFavoritas = new ControladorCancionesFavoritas();
-
         setContentView(R.layout.canciones_favoritas);
-
-        listaCancionesFavoritas = controladorCancionesFavoritas.obtenerListadoFavoritas(this);
-
-        adaptadorFavoritos = new AdaptadorCanciones(listaCancionesFavoritas, this);
 
         RecyclerView rvCanciones = findViewById(R.id.rvCancionesFavoritas);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
         rvCanciones.setLayoutManager(linearLayoutManager);
 
+        // Inicializamos el adapter con lista vacía
+        listaCancionesFavoritas = new ArrayList<>();
+        adaptadorFavoritos = new AdaptadorCanciones(listaCancionesFavoritas, this);
         rvCanciones.setAdapter(adaptadorFavoritos);
 
         registerForContextMenu(rvCanciones);
+
+        // Cargar canciones favoritas desde BD
+        controladorCancionesFavoritas.obtenerListadoFavoritas(this, canciones -> {
+            listaCancionesFavoritas.clear();
+            listaCancionesFavoritas.addAll(canciones);
+            adaptadorFavoritos.notifyDataSetChanged();
+        });
     }
+
 
     @Override
     public void onItemClick(int posicion) {
