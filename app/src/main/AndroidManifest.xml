@@ -8,6 +8,9 @@
     
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,6 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticaEvaluable1ªEvaluacion_Asensio_Sanchez_Alex">
+        <service
+            android:name=".ServicioBateria"
+            android:exported="false"/>
         <activity
             android:name=".ActivityVideoIntro"
             android:exported="true">

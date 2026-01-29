@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -34,6 +36,14 @@ public class ActivityLogin extends AppCompatActivity {
                         100
                 );
             }
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 100);
+        } else {
+            Intent serviceIntent = new Intent(this, ServicioBateria.class);
+            startService(serviceIntent);
+            Toast.makeText(this, "Servicio de batería iniciado", Toast.LENGTH_SHORT).show();
         }
 
         Button botonRegistrarse, botonLogin;
