@@ -24,4 +24,7 @@ public interface UsuarioDao {
 
     @Query("SELECT * FROM usuarios where nombre = :nombre AND password = :pass LIMIT 1")
     Usuario obtenerPorNombreContraseña(String nombre, String pass);
+
+    @Query("SELECT * FROM usuarios where id = :id")
+    Usuario obtenerPorId(long id);
 }

@@ -21,10 +21,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.concurrent.Executors;
+
 public class EditarActivity extends AppCompatActivity {
 
     int anioNacimineto, mesNacimiento, diaNacimiento, horaNacimiento, minutoNacimiento;
-    Uri imagenSeleccionada;
+    byte[] imagenBytes;
 
 
     @Override
@@ -103,66 +107,59 @@ public class EditarActivity extends AppCompatActivity {
         botonAceptarEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences prefs = getSharedPreferences("datos_usuario", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
 
-                String nombreNuevo = nombreIntroducido.getText().toString().trim();
-                String nombreAnterior = prefs.getString("nombre", "");
+                Executors.newSingleThreadExecutor().execute(() -> {
 
-                if (!nombreNuevo.isEmpty()) {
-                    editor.putString("nombre", nombreNuevo);
-                } else {
-                    editor.putString("nombre", nombreAnterior);
-                }
+                    SharedPreferences prefs = getSharedPreferences("usuarioLogueado", MODE_PRIVATE);
+
+                    Usuario usuario = DatabaseClient
+                            .getInstance(EditarActivity.this)
+                            .getDb()
+                            .usuarioDao()
+                            .obtenerPorId(prefs.getLong("idUsuario", -1));
+
+                    String nombreNuevo = nombreIntroducido.getText().toString().trim();
+
+                    if (!nombreNuevo.isEmpty()) {
+                        usuario.setNombre(nombreNuevo);
+                    }
+
+                    int radioSeleccionado = selectorSexo.getCheckedRadioButtonId();
+
+                    if (radioSeleccionado == R.id.rbHombre) {
+                        usuario.setSexo(getString(R.string.botonHombre));
+                    } else if (radioSeleccionado == R.id.rbMujer) {
+                        usuario.setSexo(getString(R.string.botonMujer));
+                    } else if (radioSeleccionado == R.id.rbOtro) {
+                        usuario.setSexo(getString(R.string.botonOtro));
+                    }
+
+                    if (diaNacimiento != -1 && mesNacimiento != -1 && anioNacimineto != -1) {
+                        String fechaNueva = diaNacimiento + "/" + mesNacimiento + "/" + anioNacimineto;
+                        usuario.setFechaNacimiento(fechaNueva);
+                    }
 
 
-                int radioSeleccionado = selectorSexo.getCheckedRadioButtonId();
+                    if (horaNacimiento != -1 && minutoNacimiento != -1) {
+                        String horaNueva = horaNacimiento + ":" + minutoNacimiento;
+                        usuario.setHoraNacimiento(horaNueva);
+                    }
 
-                String sexoAnterior = prefs.getString("sexo", "");
+                    if (imagenBytes != null) {
+                        usuario.setImagen(imagenBytes);
+                    }
 
-                if (radioSeleccionado == R.id.rbHombre) {
-                    editor.putString("sexo", getString(R.string.botonHombre));
-                } else if (radioSeleccionado == R.id.rbMujer) {
-                    editor.putString("sexo", getString(R.string.botonMujer));
-                } else if (radioSeleccionado == R.id.rbOtro) {
-                    editor.putString("sexo", getString(R.string.botonOtro));
-                } else {
-                    // si no seleccionó nada, mantener valor anterior
-                    editor.putString("sexo", sexoAnterior);
-                }
+                    DatabaseClient.getInstance(EditarActivity.this).getDb().usuarioDao().actualizarUsuario(usuario);
 
-                String fechaAnterior = prefs.getString("fechaNacimiento", "");
-                String fechaNueva = diaNacimiento + "/" + mesNacimiento + "/" + anioNacimineto;
+                    Intent intentFinalizar = new Intent(EditarActivity.this, DatosUsuarioActivity.class);
+                    startActivity(intentFinalizar);
 
-
-                if (diaNacimiento != -1 && mesNacimiento != -1 && anioNacimineto != -1) {
-                    editor.putString("fechaNacimiento", fechaNueva);
-                } else {
-                    editor.putString("fechaNacimiento", fechaAnterior);
-                }
-
-                String horaAnterior = prefs.getString("horaNacimiento", "");
-                String horaNueva = horaNacimiento + ":" + minutoNacimiento;
-
-                if (horaNacimiento != -1 && minutoNacimiento != -1) {
-                    editor.putString("horaNacimiento", horaNueva);
-                } else {
-                    editor.putString("horaNacimiento", horaAnterior);
-                }
-
-                String fotoAnterior = prefs.getString("uriFotoSeleccionada", "");
-
-                if (imagenSeleccionada != null) {
-                    editor.putString("uriFotoSeleccionada", imagenSeleccionada.toString());
-                } else {
-                    editor.putString("uriFotoSeleccionada", fotoAnterior);
-                }
-
-                editor.apply();
-
-                Intent intentFinalizar = new Intent(EditarActivity.this, DatosUsuarioActivity.class);
-                startActivity(intentFinalizar);
-
+                    runOnUiThread(() -> {
+                        Toast.makeText(EditarActivity.this, "Campos editados", Toast.LENGTH_SHORT).show();
+                        //Cierro el intent y vuelvo a login
+                        finish();
+                    });
+                });
             }
         });
     }
@@ -196,7 +193,7 @@ public class EditarActivity extends AppCompatActivity {
 
             if (uri != null) {
 
-                imagenSeleccionada = uri;
+                imagenBytes = uriToByteArray(uri);
 
                 //Filtro los flags recogidos para solo obtener los de lectura y escritura, de dejar pasar otros la aplicacion crashea
                 int takeFlags = data.getFlags();
@@ -210,6 +207,27 @@ public class EditarActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private byte[] uriToByteArray(Uri uri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+            byte[] data = new byte[1024];
+            int nRead;
+
+            while ((nRead = inputStream.read(data)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+
+            inputStream.close();
+            return buffer.toByteArray();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
