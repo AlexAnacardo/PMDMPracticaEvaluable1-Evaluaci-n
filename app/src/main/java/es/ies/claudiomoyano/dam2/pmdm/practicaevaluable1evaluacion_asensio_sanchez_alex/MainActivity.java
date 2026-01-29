@@ -1,7 +1,10 @@
 package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanchez_alex;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -18,6 +21,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -31,6 +35,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity implements RecyclerCancionesInterface {
     ArrayList<Cancion> listaCanciones = new ArrayList<>();
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
     private DrawerLayout drawerLayout;
 
     private NavigationView navView;
+
+    int idNotifications = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +90,47 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
                 cambiarIdioma("es");
             } else if(id == R.id.idioma_ingles){
                 cambiarIdioma("en");
+            }
+            else if(id == R.id.cerrarSesion){
+                SharedPreferences prefs = getSharedPreferences("usuarioLogueado", MODE_PRIVATE);
+                prefs.edit().remove("idUsuario");
+                finish();
+            }
+            else if(id == R.id.borrarCuenta){
+                SharedPreferences prefs = getSharedPreferences("usuarioLogueado", MODE_PRIVATE);
+
+                Executors.newSingleThreadExecutor().execute(() -> {
+                    Usuario usuario = DatabaseClient
+                            .getInstance(MainActivity.this)
+                            .getDb()
+                            .usuarioDao()
+                            .obtenerPorId(prefs.getLong("idUsuario", -1));
+
+                    DatabaseClient.getInstance(MainActivity.this).getDb().usuarioDao().borrarUsuario(usuario);
+
+                    prefs.edit().remove("idUsuario");
+
+                    runOnUiThread(() -> {
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        String channelId = "idCanalUserDel";
+                        CharSequence channelName = "Canal userDel";
+                        int importance = NotificationManager.IMPORTANCE_LOW;
+                        NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+                        notificationManager.createNotificationChannel(notificationChannel);
+
+                        NotificationCompat.Builder constructorNotificacion = new NotificationCompat.Builder(MainActivity.this, channelId);
+                        constructorNotificacion.setSmallIcon(R.drawable.ic_notification);
+                        constructorNotificacion.setContentTitle("Usuario eliminado");
+                        constructorNotificacion.setContentText("Se ha eliminado el usuario "+usuario.getNombre());
+
+                        constructorNotificacion.setAutoCancel(true);
+                        NotificationManager notificador = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificador.notify(idNotifications, constructorNotificacion.build());
+                        idNotifications++;
+                        //Cierro el intent y vuelvo al login
+                        finish();
+                    });
+                });
             }
 
             drawerLayout.closeDrawers();

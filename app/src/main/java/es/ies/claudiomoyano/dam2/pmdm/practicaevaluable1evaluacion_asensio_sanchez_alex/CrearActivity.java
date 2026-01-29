@@ -2,7 +2,10 @@ package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanc
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -27,6 +31,8 @@ public class CrearActivity extends AppCompatActivity {
     private EditText etNombre, etPassword;
     private Button btnFecha, btnHora, btnFoto, btnAceptar;
     private RadioGroup rgSexo;
+
+    int idNotifications = 100;
 
     int anioNacimineto, mesNacimiento, diaNacimiento, horaNacimiento, minutoNacimiento;
     private byte[] imagenBytes;
@@ -166,17 +172,39 @@ public class CrearActivity extends AppCompatActivity {
                 //Corro la insercion en un hilo secundario, no se puede hacer en el principal
                 Executors.newSingleThreadExecutor().execute(() -> {
 
-                    DatabaseClient
-                            .getInstance(CrearActivity.this)
-                            .getDb()
-                            .usuarioDao()
-                            .insertarUsuario(usuario);
+                    if(DatabaseClient.getInstance(CrearActivity.this).getDb().usuarioDao().obtenerPorNombreContraseña(nombre, password) == null){
+                        DatabaseClient
+                                .getInstance(CrearActivity.this)
+                                .getDb()
+                                .usuarioDao()
+                                .insertarUsuario(usuario);
 
-                    runOnUiThread(() -> {
-                        Toast.makeText(CrearActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
-                        //Cierro el intent y vuelvo a login
-                        finish();
-                    });
+                        runOnUiThread(() -> {
+                            Toast.makeText(CrearActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
+
+                            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+                            String channelId = "idCanalUser";
+                            CharSequence channelName = "Canal user";
+                            int importance = NotificationManager.IMPORTANCE_LOW;
+                            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelName, importance);
+                            notificationManager.createNotificationChannel(notificationChannel);
+
+                            NotificationCompat.Builder constructorNotificacion = new NotificationCompat.Builder(CrearActivity.this, channelId);
+                            constructorNotificacion.setSmallIcon(R.drawable.ic_notification);
+                            constructorNotificacion.setContentTitle("Usuario creado");
+                            constructorNotificacion.setContentText("Se ha creado el usuario "+nombre);
+
+                            constructorNotificacion.setAutoCancel(true);
+                            NotificationManager notificador = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                            notificador.notify(idNotifications, constructorNotificacion.build());
+                            idNotifications++;
+                            //Cierro el intent y vuelvo a login
+                            finish();
+                        });
+                    }else{
+                        Toast.makeText(CrearActivity.this, "Usuario ya existente", Toast.LENGTH_SHORT).show();
+                    }
                 });
             }
         });

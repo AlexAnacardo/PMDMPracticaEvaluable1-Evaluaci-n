@@ -151,16 +151,14 @@ public class EditarActivity extends AppCompatActivity {
 
                     DatabaseClient.getInstance(EditarActivity.this).getDb().usuarioDao().actualizarUsuario(usuario);
 
-                    Intent intentFinalizar = new Intent(EditarActivity.this, DatosUsuarioActivity.class);
-                    startActivity(intentFinalizar);
-
                     runOnUiThread(() -> {
-                        Toast.makeText(EditarActivity.this, "Campos editados", Toast.LENGTH_SHORT).show();
-                        //Cierro el intent y vuelvo a login
+                        //Cierro el intent y vuelvo a los datos del usuario
                         finish();
                     });
                 });
+
             }
+
         });
     }
 

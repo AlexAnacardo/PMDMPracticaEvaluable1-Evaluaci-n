@@ -10,4 +10,14 @@
         android:id="@+id/idioma_ingles"
         android:title="English"
         android:icon="@android:drawable/ic_menu_view" />
+
+    <item
+        android:id="@+id/cerrarSesion"
+        android:title="@string/cerrarSesion"
+        android:icon="@android:drawable/ic_menu_view" />
+
+    <item
+        android:id="@+id/borrarCuenta"
+        android:title="@string/borrarCuenta"
+        android:icon="@android:drawable/ic_menu_view" />
 </menu>

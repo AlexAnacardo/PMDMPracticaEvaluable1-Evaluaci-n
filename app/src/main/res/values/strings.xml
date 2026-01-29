@@ -45,4 +45,7 @@
 
     <string name="videoPresentacion">Ver video presentacion</string>
 
+    <string name="cerrarSesion">Cerrar sesión</string>
+    <string name="borrarCuenta">Borrar cuenta</string>
+
 </resources>
