@@ -27,6 +27,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvEditarNombre"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvEditarTelefono"/>
+
+    <TextView
+        android:id="@+id/tvEditarTelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvTelefono"
+        app:layout_constraintTop_toTopOf="@id/etTelefono"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/etTelefono"
+        app:layout_constraintBottom_toBottomOf="@id/etTelefono"/>
+
+    <EditText
+        android:id="@+id/etTelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/etNombre"
+        app:layout_constraintStart_toEndOf="@id/tvEditarTelefono"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/botonSeleccionarFecha"/>
 
     <TextView
@@ -44,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/botonFecha"
-        app:layout_constraintTop_toBottomOf="@id/etNombre"
+        app:layout_constraintTop_toBottomOf="@id/etTelefono"
         app:layout_constraintStart_toStartOf="@id/tvEditarFechaNacimiento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/botonSeleccionarHora"/>

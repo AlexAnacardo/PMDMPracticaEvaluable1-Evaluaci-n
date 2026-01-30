@@ -45,6 +45,7 @@ public class EditarActivity extends AppCompatActivity {
 
 
         EditText nombreIntroducido = findViewById(R.id.etNombre);
+        EditText telefonoIntroducido = findViewById(R.id.etTelefono);
         RadioGroup selectorSexo = findViewById(R.id.rbGroupSexo);
 
 
@@ -122,6 +123,12 @@ public class EditarActivity extends AppCompatActivity {
 
                     if (!nombreNuevo.isEmpty()) {
                         usuario.setNombre(nombreNuevo);
+                    }
+
+                    String telefonoNuevo = telefonoIntroducido.getText().toString().trim();
+
+                    if (!telefonoNuevo.isEmpty()) {
+                        usuario.setTelefono(telefonoNuevo);
                     }
 
                     int radioSeleccionado = selectorSexo.getCheckedRadioButtonId();

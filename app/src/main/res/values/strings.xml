@@ -48,4 +48,6 @@
     <string name="cerrarSesion">Cerrar sesión</string>
     <string name="borrarCuenta">Borrar cuenta</string>
 
+    <string name="tvTelefono">Telefono</string>
+
 </resources>

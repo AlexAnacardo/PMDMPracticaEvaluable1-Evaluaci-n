@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CrearActivity"
-    android:background="@color/background">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".CrearActivity">
 
-
+    <!-- NOMBRE -->
     <TextView
         android:id="@+id/tvCrearNombre"
         android:layout_width="wrap_content"
@@ -26,9 +26,9 @@
         android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvCrearNombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/botonSeleccionarFecha"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- CONTRASEÑA -->
     <TextView
         android:id="@+id/tvCrearContraseña"
         android:layout_width="wrap_content"
@@ -47,12 +47,32 @@
         app:layout_constraintStart_toEndOf="@id/tvCrearContraseña"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- TELÉFONO -->
+    <TextView
+        android:id="@+id/tvTelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvTelefono"
+        app:layout_constraintTop_toBottomOf="@id/etCrearContraseña"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/etTelefono"/>
+
+    <EditText
+        android:id="@+id/etTelefono"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        app:layout_constraintTop_toBottomOf="@id/etCrearContraseña"
+        app:layout_constraintStart_toEndOf="@id/tvTelefono"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- FECHA -->
     <TextView
         android:id="@+id/tvCrearFechaNacimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tvFechaNac"
-        app:layout_constraintTop_toBottomOf="@id/etCrearContraseña"
+        app:layout_constraintTop_toBottomOf="@id/etTelefono"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/botonSeleccionarFecha"/>
 
@@ -61,10 +81,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/botonFecha"
-        app:layout_constraintTop_toBottomOf="@id/etCrearContraseña"
+        app:layout_constraintTop_toBottomOf="@id/etTelefono"
         app:layout_constraintStart_toEndOf="@id/tvCrearFechaNacimiento"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- HORA -->
     <TextView
         android:id="@+id/tvCrearHoraNacimiento"
         android:layout_width="wrap_content"
@@ -85,6 +106,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/rbGroupSexo"/>
 
+    <!-- SEXO -->
     <TextView
         android:id="@+id/tvCrearSexo"
         android:layout_width="wrap_content"
@@ -96,36 +118,34 @@
         app:layout_constraintBottom_toBottomOf="@id/rbGroupSexo"/>
 
     <RadioGroup
+        android:id="@+id/rbGroupSexo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvCrearFechaNacimiento"
+        app:layout_constraintTop_toBottomOf="@id/botonSeleccionarHora"
         app:layout_constraintStart_toEndOf="@id/tvCrearSexo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/botonSeleccionarFoto"
-        android:id="@+id/rbGroupSexo">
+        app:layout_constraintBottom_toTopOf="@id/botonSeleccionarFoto">
 
         <RadioButton
             android:id="@+id/rbHombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/botonHombre"
-            />
+            android:text="@string/botonHombre"/>
 
         <RadioButton
             android:id="@+id/rbMujer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/botonMujer"
-            />
+            android:text="@string/botonMujer"/>
 
         <RadioButton
             android:id="@+id/rbOtro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/botonOtro"
-            />
+            android:text="@string/botonOtro"/>
     </RadioGroup>
 
+    <!-- FOTO -->
     <TextView
         android:id="@+id/tvFoto"
         android:layout_width="wrap_content"
@@ -146,6 +166,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/botonAceptarCrear"/>
 
+    <!-- ACEPTAR -->
     <Button
         android:id="@+id/botonAceptarCrear"
         android:layout_width="wrap_content"
@@ -155,4 +176,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

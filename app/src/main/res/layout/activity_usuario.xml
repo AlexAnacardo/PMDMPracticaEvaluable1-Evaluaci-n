@@ -14,13 +14,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvTelefonoUsuario"/>
+
+    <TextView
+        android:id="@+id/tvTelefonoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telefono"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvFechaNacimiento"/>
     <TextView
         android:id="@+id/tvFechaNacimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TFecha nacimiento"
-        app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario"
+        app:layout_constraintTop_toBottomOf="@id/tvTelefonoUsuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvHoraNacimiento"/>

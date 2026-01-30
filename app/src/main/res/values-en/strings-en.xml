@@ -47,4 +47,6 @@
     <string name="cerrarSesion">Log out</string>
     <string name="borrarCuenta">Delete account</string>
 
+    <string name="tvTelefono">Phone</string>
+
 </resources>

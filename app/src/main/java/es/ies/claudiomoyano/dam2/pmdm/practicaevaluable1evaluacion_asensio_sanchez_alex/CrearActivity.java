@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.util.concurrent.Executors;
 
 public class CrearActivity extends AppCompatActivity {
-    private EditText etNombre, etPassword;
+    private EditText etNombre, etPassword, etTelefono;
     private Button btnFecha, btnHora, btnFoto, btnAceptar;
     private RadioGroup rgSexo;
 
@@ -49,6 +49,7 @@ public class CrearActivity extends AppCompatActivity {
         btnFoto = findViewById(R.id.botonSeleccionarFoto);
         btnAceptar = findViewById(R.id.botonAceptarCrear);
         rgSexo = findViewById(R.id.rbGroupSexo);
+        etTelefono = findViewById(R.id.etTelefono);
 
         DatePickerDialog.OnDateSetListener fecha = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -120,6 +121,11 @@ public class CrearActivity extends AppCompatActivity {
                     return;
                 }
 
+                String telefono = etTelefono.getText().toString().trim();
+                if(telefono.isEmpty()){
+                    etTelefono.setError("Introduce un telefono");
+                    return;
+                }
 
                 int radioSeleccionado = rgSexo.getCheckedRadioButtonId();
                 String sexo = "";
@@ -163,6 +169,7 @@ public class CrearActivity extends AppCompatActivity {
                 Usuario usuario = new Usuario(
                         nombre,
                         password,
+                        telefono,
                         fechaNacimiento,
                         horaNacimientoStr,
                         sexo,

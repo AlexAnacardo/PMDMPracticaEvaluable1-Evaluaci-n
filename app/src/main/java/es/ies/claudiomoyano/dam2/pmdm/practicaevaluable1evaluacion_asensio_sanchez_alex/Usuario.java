@@ -13,6 +13,8 @@ public class Usuario {
     public String nombre;
     @ColumnInfo(name = "password")
     public String password;
+    @ColumnInfo(name = "numeroTelefono")
+    public String telefono;
     @ColumnInfo(name = "fechaNacimiento")
     public String fechaNacimiento;
     @ColumnInfo(name = "horaNacimiento")
@@ -22,9 +24,10 @@ public class Usuario {
     @ColumnInfo(name = "fotoPerfil", typeAffinity = ColumnInfo.BLOB)
     public byte[] imagen;
 
-    public Usuario(String nombre, String password, String fechaNacimiento, String horaNacimiento, String sexo, byte[] imagen) {
+    public Usuario(String nombre, String password, String telefono, String fechaNacimiento, String horaNacimiento, String sexo, byte[] imagen) {
         this.nombre = nombre;
         this.password = password;
+        this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
         this.horaNacimiento = horaNacimiento;
         this.sexo = sexo;
@@ -85,5 +88,13 @@ public class Usuario {
 
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

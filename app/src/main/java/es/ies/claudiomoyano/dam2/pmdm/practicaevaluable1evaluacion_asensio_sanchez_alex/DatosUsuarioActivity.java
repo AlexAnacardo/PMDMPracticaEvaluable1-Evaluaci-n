@@ -40,18 +40,21 @@ public class DatosUsuarioActivity extends AppCompatActivity {
             runOnUiThread(() -> {
 
                     String nombre = usuario.getNombre();
+                    String telefono = usuario.getTelefono();
                     String sexo = usuario.getSexo();
                     String fecha = usuario.getFechaNacimiento();
                     String hora = usuario.getHoraNacimiento();
                     byte[] foto = usuario.getImagen();
 
                     TextView tvNombre = findViewById(R.id.tvNombreUsuario);
+                    TextView tvTelefono = findViewById(R.id.tvTelefonoUsuario);
                     TextView tvFecha = findViewById(R.id.tvFechaNacimiento);
                     TextView tvHora = findViewById(R.id.tvHoraNacimiento);
                     TextView tvSexo = findViewById(R.id.tvSexo);
                     ImageView fotoPerfil = findViewById(R.id.fotoPerfil);
 
                     tvNombre.setText(nombre);
+                    tvTelefono.setText(telefono);
                     tvFecha.setText(fecha);
                     tvHora.setText(hora);
                     tvSexo.setText(sexo);
