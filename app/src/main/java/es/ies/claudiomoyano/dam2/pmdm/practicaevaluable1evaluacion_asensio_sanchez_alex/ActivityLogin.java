@@ -38,12 +38,12 @@ public class ActivityLogin extends AppCompatActivity {
             }
         }
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 100);
+        if (ContextCompat.checkSelfPermission(ActivityLogin.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(ActivityLogin.this, new String[]{Manifest.permission.SEND_SMS}, 100);
         } else {
-            Intent serviceIntent = new Intent(this, ServicioBateria.class);
+            Intent serviceIntent = new Intent(ActivityLogin.this, ServicioBateria.class);
             startService(serviceIntent);
-            Toast.makeText(this, "Servicio de batería iniciado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityLogin.this, "Servicio de batería iniciado", Toast.LENGTH_SHORT).show();
         }
 
         Button botonRegistrarse, botonLogin;
@@ -63,6 +63,18 @@ public class ActivityLogin extends AppCompatActivity {
                 contraseña= etContraseña.getText().toString();
 
                 Executors.newSingleThreadExecutor().execute(() -> {
+
+                    //Si el usuario Admin no existe en el sistema, lo añado
+                    Usuario usuarioAdmin = DatabaseClient
+                            .getInstance(ActivityLogin.this)
+                            .getDb()
+                            .usuarioDao()
+                            .obtenerPorNombreContraseña("Admin", "Admin");
+
+                    if(usuarioAdmin==null){
+                        DatabaseClient.getInstance(ActivityLogin.this).getDb().usuarioDao().insertarUsuario(new Usuario("Admin", "Admin", "348676106", null, null, null, null));
+                    }
+
                     Usuario usuario = DatabaseClient
                             .getInstance(ActivityLogin.this)
                             .getDb()

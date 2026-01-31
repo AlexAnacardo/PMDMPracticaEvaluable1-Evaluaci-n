@@ -10,10 +10,10 @@ import android.os.IBinder;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
+import java.util.concurrent.Executors;
+
 
 public class ServicioBateria extends Service {
-
-    private static final String NUMERO_TELEFONO = "555-1212";
 
     private BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
         @Override
@@ -54,11 +54,24 @@ public class ServicioBateria extends Service {
     }
 
     private void sendSMS(String mensaje) {
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(NUMERO_TELEFONO, null, mensaje, null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                Usuario usuarioAdmin = DatabaseClient
+                        .getInstance(ServicioBateria.this)
+                        .getDb()
+                        .usuarioDao()
+                        .obtenerPorNombreContraseña("Admin", "Admin");
+
+                if(usuarioAdmin == null){
+                    usuarioAdmin = new Usuario("Admin", "Admin", "348676106", null, null, null, null);
+                }
+
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(usuarioAdmin.getTelefono(), null, mensaje, null, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
