@@ -40,6 +40,7 @@
         <activity android:name=".EditarActivity"></activity>
         <activity android:name=".CrearActivity"></activity>
         <activity android:name=".ActivityLogin"></activity>
+        <activity android:name=".ActivityAudio"></activity>
     </application>
 
 </manifest>

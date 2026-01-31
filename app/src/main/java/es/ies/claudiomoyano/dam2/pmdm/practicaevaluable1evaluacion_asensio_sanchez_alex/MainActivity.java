@@ -258,6 +258,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             startActivity(intentVideo);
             return true;
         }
+        else if(id == R.id.verAudioExplicacion){
+            Intent intentAudio = new Intent(this, ActivityAudio.class);
+            intentAudio.putExtra("primeraVez", "no");
+            startActivity(intentAudio);
+            return true;
+        }
         else{
             return true;
         }

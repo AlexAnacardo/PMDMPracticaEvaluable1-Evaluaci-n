@@ -49,4 +49,6 @@
 
     <string name="tvTelefono">Phone</string>
 
+    <string name="audioExplicacion">Listen explicative audio</string>
+
 </resources>

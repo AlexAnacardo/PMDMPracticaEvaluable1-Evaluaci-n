@@ -50,4 +50,6 @@
 
     <string name="tvTelefono">Telefono</string>
 
+    <string name="audioExplicacion">Ver audio de explicacion</string>
+
 </resources>
