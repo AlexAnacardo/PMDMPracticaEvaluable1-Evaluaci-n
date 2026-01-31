@@ -264,6 +264,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             startActivity(intentAudio);
             return true;
         }
+        else if(id == R.id.importarContactos){
+            Intent intentContactos = new Intent(this, ActivityImportarContactos.class);
+            startActivity(intentContactos);
+            return true;
+        }
         else{
             return true;
         }

@@ -38,6 +38,11 @@
         android:title="@string/audioExplicacion"
         app:showAsAction="ifRoom"
         />
+    <item
+        android:id="@+id/importarContactos"
+        android:title="@string/importarContactos"
+        app:showAsAction="ifRoom"
+        />
 
 
 

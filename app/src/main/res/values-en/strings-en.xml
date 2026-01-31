@@ -42,13 +42,15 @@
     <string name="botonLogin">Login</string>
     <string name="botonRegistrar">Sign in</string>
 
-    <string name="videoPresentacion">Ver video presentacion</string>
+    <string name="videoPresentacion">View presentation video</string>
 
     <string name="cerrarSesion">Log out</string>
     <string name="borrarCuenta">Delete account</string>
 
     <string name="tvTelefono">Phone</string>
 
-    <string name="audioExplicacion">Listen explicative audio</string>
+    <string name="audioExplicacion">Listen to explicative audio</string>
+
+    <string name="importarContactos">Import cotacts</string>
 
 </resources>
