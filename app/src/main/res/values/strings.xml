@@ -55,4 +55,6 @@
     <string name="importarContactos">Importar contactos</string>
 
     <string name="preferencias">Preferencias</string>
+
+    <string name="toastCambioIdioma">El cambio de idioma se aplicara la proxima vez que abra la aplicación</string>
 </resources>

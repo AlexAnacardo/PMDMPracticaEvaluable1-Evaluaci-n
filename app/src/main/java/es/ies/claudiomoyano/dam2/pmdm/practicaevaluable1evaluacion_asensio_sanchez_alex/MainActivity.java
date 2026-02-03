@@ -26,6 +26,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -86,12 +88,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
         navView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            if(id == R.id.idioma_español) {
-                cambiarIdioma("es");
-            } else if(id == R.id.idioma_ingles){
-                cambiarIdioma("en");
-            }
-            else if(id == R.id.cerrarSesion){
+
+            if(id == R.id.cerrarSesion){
                 SharedPreferences prefs = getSharedPreferences("usuarioLogueado", MODE_PRIVATE);
                 prefs.edit().remove("idUsuario");
                 finish();
@@ -278,24 +276,4 @@ public class MainActivity extends AppCompatActivity implements RecyclerCanciones
             return true;
         }
     }
-
-    private void cambiarIdioma(String idioma) {
-        //Creo un locale usando el codigo pasado al pulsar el boton del menu drawer
-        Locale locale = new Locale(idioma);
-        //Lo marco como el idioma por defecto, esto solo cambia las configuraciones de java a la hora de mostrar cosas como por ejemplo, el tecloado o el formateo de fechas
-        Locale.setDefault(locale);
-
-        //Obtengo la configuracion del sistema y le aplico el idioma, esto afecta al archivo del que la aplicacion toma los recursos
-        Configuration config = getResources().getConfiguration();
-        config.setLocale(locale);
-
-        //Recargo los recursos (strings.xml) para que el sistema use el correspondiente al idioma seleccionado
-        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
-
-        // Vuelvo a lanzar la activity main para que se apliquen los cambios
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
 }

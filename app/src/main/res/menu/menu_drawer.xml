@@ -2,16 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/idioma_español"
-        android:title="Español"
-        android:icon="@android:drawable/ic_menu_view" />
-
-    <item
-        android:id="@+id/idioma_ingles"
-        android:title="English"
-        android:icon="@android:drawable/ic_menu_view" />
-
-    <item
         android:id="@+id/cerrarSesion"
         android:title="@string/cerrarSesion"
         android:icon="@android:drawable/ic_menu_view" />

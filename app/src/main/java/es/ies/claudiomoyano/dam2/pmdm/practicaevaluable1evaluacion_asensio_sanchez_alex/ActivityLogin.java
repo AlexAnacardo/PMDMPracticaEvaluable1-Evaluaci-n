@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +22,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 public class ActivityLogin extends AppCompatActivity {
@@ -34,11 +36,25 @@ public class ActivityLogin extends AppCompatActivity {
 
         boolean modoOscuro = prefs.getBoolean("modo_oscuro", false);
 
+
         if (modoOscuro) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+
+        String idioma = prefs.getString("idioma", "es");
+
+        Locale locale = new Locale(idioma);
+        Locale.setDefault(locale);
+
+        Configuration config = getResources().getConfiguration();
+        config.setLocale(locale);
+
+        getResources().updateConfiguration(
+                config,
+                getResources().getDisplayMetrics()
+        );
 
         setContentView(R.layout.activity_login);
 

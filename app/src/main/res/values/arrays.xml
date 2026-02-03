@@ -2,7 +2,7 @@
 <resources>
     <string-array name="idiomas">
         <item>Español</item>
-        <item>Inglés</item>
+        <item>English</item>
     </string-array>
 
     <string-array name="idiomas_valores">

@@ -55,4 +55,6 @@
 
     <string name="preferencias">Preferences</string>
 
+    <string name="toastCambioIdioma">Language changes will aply next time the app is opened</string>
+
 </resources>
