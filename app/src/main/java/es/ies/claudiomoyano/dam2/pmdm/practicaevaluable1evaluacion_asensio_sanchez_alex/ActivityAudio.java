@@ -1,6 +1,7 @@
 package es.ies.claudiomoyano.dam2.pmdm.practicaevaluable1evaluacion_asensio_sanchez_alex;
 
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Handler;
 import android.widget.MediaController;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import java.io.IOException;
 
@@ -27,6 +29,15 @@ public class ActivityAudio extends AppCompatActivity implements MediaController.
         mediaController.setAnchorView(findViewById(R.id.linearLayoutAudio));
         Handler handler = new Handler();
 
+        // Obtengo el volumen de shared preferences
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //Por defecto 50%
+        int volPref = prefs.getInt("volumen", 50);
+        //Los volumenes funcionan con un float y van desde 0.0 a 1, tambien van por canales separados
+        //(derecho e izquierdo)
+        float volumen = volPref / 100f;
+
+
         try {
             mediaPlayer.setDataSource(this, Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.explicacion));
             mediaPlayer.prepare();
@@ -37,6 +48,8 @@ public class ActivityAudio extends AppCompatActivity implements MediaController.
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                //Aplico el volumen al video
+                mediaPlayer.setVolume(volumen, volumen);
                 handler.post(new Runnable() {
                     public void run() {
                         // Muestra el control en pantalla. Tras 20 segundos de inactividad, se oculta

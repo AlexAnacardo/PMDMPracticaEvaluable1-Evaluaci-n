@@ -57,4 +57,9 @@
 
     <string name="toastCambioIdioma">Language changes will aply next time the app is opened</string>
 
+    <string name="strModoOscuro">Dark mode</string>
+    <string name="strIdioma">Language</string>
+    <string name="strVolumen">Volume</string>
+    <string name="strVolumenSummary">Set the presentation video volume</string>
+
 </resources>

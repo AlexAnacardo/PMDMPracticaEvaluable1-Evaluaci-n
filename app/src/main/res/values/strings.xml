@@ -57,4 +57,9 @@
     <string name="preferencias">Preferencias</string>
 
     <string name="toastCambioIdioma">El cambio de idioma se aplicara la proxima vez que abra la aplicación</string>
+
+    <string name="strModoOscuro">Modo oscuro</string>
+    <string name="strIdioma">Idioma</string>
+    <string name="strVolumen">Volumen</string>
+    <string name="strVolumenSummary">Indique el volumen del video de presentacion</string>
 </resources>

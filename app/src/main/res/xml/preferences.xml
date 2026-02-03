@@ -3,12 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <SwitchPreferenceCompat
         app:key="modo_oscuro"
-        app:title="Modo oscuro"
+        app:title="@string/strModoOscuro"
         app:defaultValue="false"/>
 
     <ListPreference
         app:key="idioma"
-        app:title="Idioma"
+        app:title="@string/strIdioma"
         app:entries="@array/idiomas"
         app:entryValues="@array/idiomas_valores"/>
+
+    <SeekBarPreference
+        android:key="volumen"
+        android:title="@string/strVolumen"
+        android:summary="@string/strVolumenSummary"
+        android:min="0"
+        android:max="100"
+        android:defaultValue="50"/>
 </PreferenceScreen>

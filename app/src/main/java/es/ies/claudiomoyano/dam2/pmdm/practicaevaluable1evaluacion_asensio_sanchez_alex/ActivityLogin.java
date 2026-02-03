@@ -42,7 +42,7 @@ public class ActivityLogin extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
+        //Lo mismo pero para el idioma
         String idioma = prefs.getString("idioma", "es");
 
         Locale locale = new Locale(idioma);
