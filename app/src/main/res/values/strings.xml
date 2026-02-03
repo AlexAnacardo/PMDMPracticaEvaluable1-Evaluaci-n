@@ -62,4 +62,18 @@
     <string name="strIdioma">Idioma</string>
     <string name="strVolumen">Volumen</string>
     <string name="strVolumenSummary">Indique el volumen del video de presentacion</string>
+
+    <string name="servicioBateria">Servicio de bateria iniciado</string>
+
+    <string name="minutosCancion">minutos</string>
+
+    <string name="contactosImportados">Contactos añadidos a la base de datos</string>
+
+    <string name="eliminadaFavorita">eliminada de canciones favoritas</string>
+
+    <string name="usuarioContraseñaIncorrecto">Usuario o contraseña incorrectos</string>
+
+    <string name="usuarioCreado">Usuario creado</string>
+    <string name="usuarioYaExistente">Usuario ya existente</string>
+
 </resources>

@@ -187,7 +187,7 @@ public class CrearActivity extends AppCompatActivity {
                                 .insertarUsuario(usuario);
 
                         runOnUiThread(() -> {
-                            Toast.makeText(CrearActivity.this, "Usuario creado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CrearActivity.this, R.string.usuarioCreado, Toast.LENGTH_SHORT).show();
 
                             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -210,7 +210,9 @@ public class CrearActivity extends AppCompatActivity {
                             finish();
                         });
                     }else{
-                        Toast.makeText(CrearActivity.this, "Usuario ya existente", Toast.LENGTH_SHORT).show();
+                        runOnUiThread(() -> {
+                            Toast.makeText(CrearActivity.this, R.string.usuarioYaExistente, Toast.LENGTH_SHORT).show();
+                        });
                     }
                 });
             }

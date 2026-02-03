@@ -62,4 +62,16 @@
     <string name="strVolumen">Volume</string>
     <string name="strVolumenSummary">Set the presentation video volume</string>
 
+    <string name="servicioBateria">Battery service initiated</string>
+
+    <string name="minutosCancion">minutes</string>
+
+    <string name="contactosImportados">Contacts added to the database</string>
+
+    <string name="eliminadaFavorita">deleted from favorites</string>
+
+    <string name="usuarioContraseñaIncorrecto">Incorrect password or user</string>
+
+    <string name="usuarioCreado">Created user</string>
+    <string name="usuarioYaExistente">User already existing</string>
 </resources>

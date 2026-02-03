@@ -73,7 +73,7 @@ public class ActivityLogin extends AppCompatActivity {
         } else {
             Intent serviceIntent = new Intent(ActivityLogin.this, ServicioBateria.class);
             startService(serviceIntent);
-            Toast.makeText(ActivityLogin.this, "Servicio de batería iniciado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityLogin.this, R.string.servicioBateria, Toast.LENGTH_SHORT).show();
         }
 
         Button botonRegistrarse, botonLogin;
@@ -120,7 +120,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                             startActivity(new Intent(ActivityLogin.this, MainActivity.class));
                         } else {
-                            Toast.makeText(ActivityLogin.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityLogin.this, R.string.usuarioContraseñaIncorrecto, Toast.LENGTH_SHORT).show();
                         }
                     });
                 });

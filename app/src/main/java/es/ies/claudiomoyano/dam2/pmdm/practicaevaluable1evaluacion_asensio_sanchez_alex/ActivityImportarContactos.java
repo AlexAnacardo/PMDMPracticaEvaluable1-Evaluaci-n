@@ -93,7 +93,7 @@ public class ActivityImportarContactos extends AppCompatActivity {
             });
         }
 
-        Toast.makeText(ActivityImportarContactos.this, "Contactos añadidos a la base de datos", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ActivityImportarContactos.this, R.string.contactosImportados, Toast.LENGTH_SHORT).show();
 
         cursor.close();
         finish();

@@ -41,7 +41,7 @@ public class DetalleCancionActivity extends AppCompatActivity {
 
         int segundosCancion = intentPadre.getIntExtra("duracion", 0);
 
-        String duracionCancion = segundosCancion/60+" minutos";
+        String duracionCancion = segundosCancion/60+" "+getString(R.string.minutosCancion);
 
         duracion.setText(duracionCancion);
 
