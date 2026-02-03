@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        app:key="modo_oscuro"
+        app:title="Modo oscuro"
+        app:defaultValue="false"/>
+
+    <ListPreference
+        app:key="idioma"
+        app:title="Idioma"
+        app:entries="@array/idiomas"
+        app:entryValues="@array/idiomas_valores"/>
+</PreferenceScreen>

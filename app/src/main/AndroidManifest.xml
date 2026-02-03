@@ -43,6 +43,7 @@
         <activity android:name=".ActivityLogin"></activity>
         <activity android:name=".ActivityAudio"></activity>
         <activity android:name=".ActivityImportarContactos"/>
+        <activity android:name=".ActivityPreferencias"/>
 
     </application>
 

@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.recyclerview)
     implementation(libs.room.common.jvm)
     implementation(libs.room.runtime)
+    implementation(libs.preference)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

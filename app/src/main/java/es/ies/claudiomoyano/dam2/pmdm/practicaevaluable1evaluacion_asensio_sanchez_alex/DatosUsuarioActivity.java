@@ -75,25 +75,5 @@ public class DatosUsuarioActivity extends AppCompatActivity {
                 startActivity(intentEditar);
             }
         });
-
-        //Recojo el switch
-        Switch switchModooscuro = findViewById(R.id.modoOscuro);
-
-        //Recojo el modo actual de la aplicacion, uso "& Configuration.UI_MODE_NIGHT_MASK" para obtener solamente si estoy en
-        //modo claro u oscuro
-        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-
-        //Si el modo activo es el oscuro, pongo el switch activado por defecto
-        switchModooscuro.setChecked(currentNightMode == Configuration.UI_MODE_NIGHT_YES);
-
-        //Le asigno un listener para cada vez que se active/desactive, al hacerlo se activara y desactivara el modo noche
-        //lo que cambia el colors.xml que la app usa por defecto
-        switchModooscuro.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-        });
     }
 }

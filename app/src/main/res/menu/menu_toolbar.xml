@@ -44,6 +44,12 @@
         app:showAsAction="ifRoom"
         />
 
+    <item
+        android:id="@+id/preferencias"
+        android:title="@string/preferencias"
+        app:showAsAction="ifRoom"
+        />
+
 
 
 </menu>
